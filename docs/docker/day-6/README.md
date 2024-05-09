@@ -1,4 +1,4 @@
-## PICK - Programa Intensivo em Containers e Kubernetes 2024 
+## PICK - Programa Intensivo em Containers e Kubernetes 2024 :computer: 
 
-### Day-6 Docker
+### Day-6 Docker :rocket:
 
