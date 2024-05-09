@@ -1,7 +1,7 @@
 # PICK - Programa Intensivo em Containers e Kubernetes 2024
 
-![Docker](https://github.com/edemirtoldo/pick/tree/main/docs/images/docker2.png) 
-![Kubernetes](https://github.com/edemirtoldo/pick/tree/main/docs/images/k8s.png)
+![Docker](https://github.com/edemirtoldo/pick/blob/main/docs/images/docker2.png) 
+![Kubernetes](https://github.com/edemirtoldo/pick/blob/main/docs/images/k8s.png)
 
 Um programa completo da LINUXtips com duração total de um ano, para te tornar uma pessoa especialista em containers e Kubernetes, conhecendo mais sobre containers e Kubernetes do que 99% das pessoas que já trabalham com Kubernetes!
 
