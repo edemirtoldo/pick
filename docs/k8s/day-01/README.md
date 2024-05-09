@@ -1,6 +1,8 @@
-# Day-1 - Entendendo o que são Containers e Kubernetes
+# PICK - Programa Intensivo em Containers e Kubernetes 2024 :computer:
 
+## Day-1 Kubernetes :rocket:
 
+## Entendendo o que são Containers e Kubernetes
 
 ## O que é um container?
 
