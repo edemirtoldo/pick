@@ -4,7 +4,15 @@ Um programa completo da LINUXtips com duração total de um ano, para te tornar 
 
 Acompanhe o meu progresso no PICK de 2024 nesse repositório. :rocket:
 
-### Docker
+## Índice
 
-Clique [aqui](https://github.com/edemirtoldo/pick/blob/main/docs/docker/day-1) para acessar Day 1 - Containers, Namespaces, Cgroups e Docker
+### Docker:
+3. [Docker](https://github.com/edemirtoldo/pick/tree/main/docs/docker)
+    - [Day 1 - Containers, Namespaces, Cgroups e Docker](https://github.com/edemirtoldo/pick/tree/main/docs/docker/day-1)
 
+
+
+
+:sunglasses:
+
+:two: :zero: :two: :four:
