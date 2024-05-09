@@ -1,6 +1,6 @@
 # PICK - Programa Intensivo em Containers e Kubernetes 2024 :computer:
 
-## Day-7 :rocket:
+## Day-7 Kubernetes :rocket:
 
 ### O que iremos ver hoje?
 
