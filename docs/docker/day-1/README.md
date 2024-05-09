@@ -26,43 +26,65 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
-Comandos básicos do Docker:
+### Comandos básicos do Docker:
 
+Executar um container em modo interativo com porta 80 mapeada para a porta 8080 do host
 ```
-# Executa um container em modo interativo com porta 80 mapeada para a porta 8080 do host
 docker container run -it -p 8080:80 --name meu-ngnix nginx
+```
 
-# Lista os containers em execução
+Listar os containers em execução
+```
 docker container ls
+```
 
-# Lista as imagens
+Listar as imagens dos containers
+```
 docker image ls
+```
 
-# Criar um container sem executar
+Criar um container sem executar
+```
 docker container create -it --name meu-nginx nginx
+```
 
-# Para um container
+Parar um container
+```
 docker container stop meu-nginx
+```
 
-# Inicia um container
+Iniciar um container
+```
 docker container start meu-nginx
+```
 
-# Remove um container
+Remover um container
+```
 docker container rm meu-nginx
+```
 
-# Remove uma imagem
+Remover uma imagem
+```
 docker image rm nginx
+```
 
-# Conectar em um container em execução
+Conectar em um container em execução
+```
 docker container attach meu-nginx
+```
 
-# Visualizar os logs de um container
+Visualizar os logs de um container
+```
 docker container logs meu-nginx
+```
 
-# Visualizar o consumo de recursos de um container
+Visualizar o consumo de recursos de um container
+```
 docker container stats meu-nginx
+```
 
-# Criar uma imagem a partir de um Dockerfile
+Criar uma imagem a partir de um Dockerfile
+```
 docker image build -t meu-nginx:1.0 .
 ```
 
