@@ -690,6 +690,9 @@ Então é isso. Nos vemos no próximo dia, onde continuaremos nossa aventura nes
 > Link da documentação: https://github.com/badtuxx/CertifiedContainersExpert.git
 >
 > [Link da documentação](https://github.com/badtuxx/CertifiedContainersExpert.git){:target="_blank"}
+>
+><a href="https://github.com/badtuxx/CertifiedContainersExpert.git" target="_blank">Link da documentação</a>
+
 
 
 
