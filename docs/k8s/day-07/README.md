@@ -74,7 +74,7 @@ Para a criação de um `StatefulSet` precisamos de um arquivo de configuração 
 
 Para o nosso exemplo, vamos utilizar o Nginx como aplicação que será gerenciada pelo `StatefulSet`, e vamos fazer com que cada `Pod` tenha um volume persistente associado a ele, e com isso, vamos ter uma página web diferente para cada `Pod`.
 
-Para isso, vamos criar o arquivo `nginx-statefulset.yaml` com o seguinte conteúdo:
+Para isso, vamos criar o arquivo `statefulset-nginx.yaml` com o seguinte conteúdo:
 
 ```yaml
 apiVersion: apps/v1
@@ -116,7 +116,7 @@ spec:
 Agora, vamos criar o `StatefulSet` com o comando:
 
 ```bash
-kubectl apply -f nginx-statefulset.yaml
+kubectl apply -f statefulset-nginx.yaml 
 ```
 
 &nbsp;
@@ -190,7 +190,7 @@ nginx-2   1/1     Running   0          8s
 
 &nbsp;
 
-O nosso `StatefulSet` está criado, mas ainda temos que criar o `Headless Service` para que possamos acessar os `Pods` individualmente, e para isso, vamos criar o arquivo `nginx-headless-service.yaml` com o seguinte conteúdo:
+O nosso `StatefulSet` está criado, mas ainda temos que criar o `Headless Service` para que possamos acessar os `Pods` individualmente, e para isso, vamos criar o arquivo `nginx-headless-svc.yaml` com o seguinte conteúdo:
 
 ```yaml
 apiVersion: v1
@@ -213,7 +213,7 @@ spec:
 Pronto, arquivo criado, hora de criar o `Headless Service` com o comando:
 
 ```bash
-kubectl apply -f nginx-headless-service.yaml
+kubectl apply -f nginx-headless-svc.yaml
 ```
 
 &nbsp;
@@ -238,23 +238,7 @@ kubectl describe service nginx
 Agora que já temos o `StatefulSet` e o `Headless Service` criados, podemos acessar cada `Pod` individualmente, para isso, vamos utilizar o comando:
 
 ```bash
-kubectl run -it --rm debug --image=busybox --restart=Never -- sh
-```
-
-&nbsp;
-
-Agora vamos utilizar o comando `nslookup` para verificar o endereço IP de cada `Pod`, para isso, vamos utilizar o comando:
-
-```bash
-nslookup nginx-0.nginx
-```
-
-&nbsp;
-
-Agora vamos acessar o `Pod` utilizando o endereço IP, para isso, vamos utilizar o comando:
-
-```bash
-wget -O- http://<endereço-ip-do-pod>
+kubectl exec -ti nginx-0 -- bash
 ```
 
 &nbsp;
@@ -262,31 +246,84 @@ wget -O- http://<endereço-ip-do-pod>
 Precisamos mudar a página web de cada `Pod` para que possamos verificar se estamos acessando o `Pod` correto, para isso, vamos utilizar o comando:
 
 ```bash
-echo "Pod 0" > /usr/share/nginx/html/index.html
+echo "GIROPOPS-0" > /usr/share/nginx/html/index.html
 ```
 
 &nbsp;
 
-Agora vamos acessar o `Pod` novamente, para isso, vamos utilizar o comando:
+Agora vamos conferir se foi alterado corretamente a mudança, para isso, vamos utilizar o comando:
 
 ```bash
-wget -O- http://<endereço-ip-do-pod>
+curl nginx-0.nginx.default.svc.cluster.local
+
+GIROPOPS-0
 ```
 
 &nbsp;
 
-A saída do comando deve ser:
+Vamos vazer o mesmo procedimento no nginx-1.
 
 ```bash
-Connecting to <endereço-ip-do-pod>:80 (<endereço-ip-do-pod>:80)
-Pod 0
+kubectl exec -ti nginx-1 -- bash
 ```
 
 &nbsp;
 
-Caso queira, você pode fazer o mesmo para os outros `Pods`, basta mudar o número do `Pod` no comando `nslookup` e no comando `echo`.
+```bash
+echo "GIROPOPS-0" > /usr/share/nginx/html/index.html
+```
 
 &nbsp;
+
+```bash
+curl nginx-1.nginx.default.svc.cluster.local
+
+GIROPOPS-1
+```
+
+Vamos vazer o mesmo procedimento no nginx-2.
+
+```bash
+kubectl exec -ti nginx-2 -- bash
+```
+
+&nbsp;
+
+```bash
+echo "GIROPOPS-2" > /usr/share/nginx/html/index.html
+```
+
+&nbsp;
+
+```bash
+curl nginx-2.nginx.default.svc.cluster.local
+
+GIROPOPS-2
+```
+&nbsp;
+
+Para ter certeza que todos os pods estão alterados, vamos utlizar o comando:
+
+```bash
+curl nginx-0.nginx.default.svc.cluster.local && curl nginx-1.nginx.default.svc.cluster.local && curl nginx-2.nginx.default.svc.cluster.local
+
+GIROPOPS-0
+GIROPOPS-1
+GIROPOPS-2
+```
+
+&nbsp;
+
+Esses comandos acima são acessador diretamente no pod caso queria consultar diretamente de seu computador, vamos utlizar o comando:
+
+```bash
+kubectl exec -ti nginx-0 -- curl nginx-0.nginx.default.svc.cluster.local 
+
+GIROPOPS-0
+```
+
+&nbsp;
+
 
 ##### Excluindo um StatefulSet
 
@@ -685,14 +722,8 @@ Espero que você tenha curtido o conteúdo de hoje e lembre-se de fazer a liçã
 
 Então é isso. Nos vemos no próximo dia, onde continuaremos nossa aventura nesse mundinho mágico do containers. Até lá! **#VAIIII**
 
+
 > O Conteudo faz parte do curso - PICK da LINUXTIPS
 >
 > Link da documentação: https://github.com/badtuxx/CertifiedContainersExpert.git
->
-> [Link da documentação](https://github.com/badtuxx/CertifiedContainersExpert.git){:target="_blank"}
->
-><a href="https://github.com/badtuxx/CertifiedContainersExpert.git" target="_blank">Link da documentação</a>
-
-
-
 
