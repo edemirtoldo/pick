@@ -363,16 +363,15 @@ kubectl delete -f nginx-headless-service.yaml
 
 ##### Excluindo um PVC
 
-Para excluir um `Volume` precisamos utilizar o comando:
+Para excluir os `Volume` precisamos utilizar o comando:
 
 ```bash
-kubectl delete pvc www-0
+kubectl delete pvc nginx-persistent-storage-nginx-0 
+kubectl delete pvc nginx-persistent-storage-nginx-1
+kubectl delete pvc nginx-persistent-storage-nginx-2
 ```
 
 &nbsp;
-
-
-
 
 #### Services
 
