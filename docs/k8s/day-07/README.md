@@ -688,4 +688,8 @@ Então é isso. Nos vemos no próximo dia, onde continuaremos nossa aventura nes
 > O Conteudo faz parte do curso - PICK da LINUXTIPS
 >
 > Link da documentação: https://github.com/badtuxx/CertifiedContainersExpert.git
+>
+> [Link da documentação](https://github.com/badtuxx/CertifiedContainersExpert.git){:target="_blank"}
+
+
 
