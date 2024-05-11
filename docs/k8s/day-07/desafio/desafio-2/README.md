@@ -168,11 +168,16 @@ spec:
 
 comandos
 
-
+```bash
 kubectl apply -f giropops-senhas-deployment.yaml
+
 kubectl apply -f giropops-senhas-service.yaml
+
 kubectl apply -f nginx-headless-svc.yaml  
 
 kubectl apply -f redis-deployment.yaml
+
 kubectl apply -f redis-service.yaml
+
 kubectl apply -f statefulset-ngnix.yaml
+```
