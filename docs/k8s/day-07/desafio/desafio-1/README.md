@@ -20,15 +20,11 @@ IMPORTANTE: Tudo deve ser criado utilizando manifestos YAML. Os manifestos devem
 
 ### Solução:
 
-
 ```bash
 cd manifests
 ```
 
-&nbsp;
-
 Vamos criar o arquivo `statefulset-nginx.yaml` com o seguinte conteúdo:
-
 
 ```yaml
 apiVersion: apps/v1
@@ -65,9 +61,6 @@ spec:
             storage: 1Gi
 ```
 
-&nbsp;
-
-
 Vamos criar o arquivo `nginx-headless-svc.yaml` com o seguinte conteúdo:
 
 ```yaml
@@ -85,8 +78,6 @@ spec:
   selector:
     app: nginx
 ```
-
-&nbsp;
 
 Criando o `StatefulSet` com o comando:
 
@@ -115,6 +106,6 @@ kubectl get service
 
 Vamos utilizar o comando `set image` que é uma subcomando do `kubectl` que permite atualizar as imagens dos contêineres em um recurso específico no cluster. Documentação <https://kubernetes.io/docs/reference/kubectl/generated/kubectl_set/kubectl_set_image/>
 
-```yaml
+```bash
 kubectl set image statefulset/giropops-set nginx=nginx:1.19.0
 ```
