@@ -1,7 +1,7 @@
 ### Desafio do Day-7
 
-Este desafio tem duas partes:
+Temos dois desafios:
 
-1 - Desafio StatefulSets e Headless Services no Kubernetes
+- Primeiro - Desafio StatefulSets e Headless Services no Kubernetes
 
-2 - Kubernetes Services
+- Segundo - Kubernetes Services
