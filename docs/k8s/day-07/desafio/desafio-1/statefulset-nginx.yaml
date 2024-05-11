@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: giropops-set
+  name: "giropops-set"
 spec:
   serviceName: "nginx-svc"
   replicas: 3
