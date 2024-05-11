@@ -103,9 +103,55 @@ Para verificar se o Headless Service foi criado:
 kubectl get service
 ```
 
-
-Vamos utilizar o comando `set image` que é uma subcomando do `kubectl` que permite atualizar as imagens dos contêineres em um recurso específico no cluster. Documentação <https://kubernetes.io/docs/reference/kubectl/generated/kubectl_set/kubectl_set_image/>
+Vamos utilizar o comando `set image` que é uma subcomando do `kubectl` que permite atualizar as imagens dos contêineres em um recurso específico no cluster. Documentação: <https://kubernetes.io/docs/reference/kubectl/generated/kubectl_set/kubectl_set_image/>
 
 ```bash
 kubectl set image statefulset/giropops-set nginx=nginx:1.19.0
 ```
+Vamos verificar se foi trocado a versão da imagem:
+
+```bash
+kubectl describe statefulset giropops-set
+
+
+Name:               giropops-set
+Namespace:          default
+CreationTimestamp:  Sat, 11 May 2024 14:55:27 +0000
+Selector:           app=nginx
+Labels:             <none>
+Annotations:        <none>
+Replicas:           3 desired | 3 total
+Update Strategy:    RollingUpdate
+  Partition:        0
+Pods Status:        3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:1.19.0 # FOI TROCADO A VERSÃO CORRETAMENTE
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:
+      /usr/share/nginx/html from nginx-data (rw)
+  Volumes:  <none>
+Volume Claims:
+  Name:          nginx-data
+  StorageClass:  
+  Labels:        <none>
+  Annotations:   <none>
+  Capacity:      1Gi
+  Access Modes:  [ReadWriteOnce]
+Events:
+  Type    Reason            Age                 From                    Message
+  ----    ------            ----                ----                    -------
+  Normal  SuccessfulCreate  107s                statefulset-controller  create Claim nginx-data-giropops-set-0 Pod giropops-set-0 in StatefulSet giropops-set success
+  Normal  SuccessfulCreate  93s                 statefulset-controller  create Claim nginx-data-giropops-set-1 Pod giropops-set-1 in StatefulSet giropops-set success
+  Normal  SuccessfulCreate  86s                 statefulset-controller  create Claim nginx-data-giropops-set-2 Pod giropops-set-2 in StatefulSet giropops-set success
+  Normal  SuccessfulDelete  60s                 statefulset-controller  delete Pod giropops-set-2 in StatefulSet giropops-set successful
+  Normal  SuccessfulCreate  59s (x2 over 86s)   statefulset-controller  create Pod giropops-set-2 in StatefulSet giropops-set successful
+  Normal  SuccessfulDelete  52s                 statefulset-controller  delete Pod giropops-set-1 in StatefulSet giropops-set successful
+  Normal  SuccessfulCreate  51s (x2 over 93s)   statefulset-controller  create Pod giropops-set-1 in StatefulSet giropops-set successful
+  Normal  SuccessfulDelete  49s                 statefulset-controller  delete Pod giropops-set-0 in StatefulSet giropops-set successful
+  Normal  SuccessfulCreate  48s (x2 over 107s)  statefulset-controller  create Pod giropops-set-0 in StatefulSet giropops-set successful
+  ```
