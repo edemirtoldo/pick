@@ -90,18 +90,30 @@ spec:
 
 Criando o `StatefulSet` com o comando:
 
-```yaml
+```bash
 kubectl apply -f statefulset-nginx.yaml 
+```
+
+Para verificar se o StatefulSet foi criado:
+
+```bash
+kubectl get statefulset
 ```
 
 Criando o `Headless Services` com o comando:
 
-```yaml
+```bash
 kubectl apply -f nginx-headless-svc.yaml
 ```
 
+Para verificar se o Headless Service foi criado:
 
-Vamos utilizar o comando `set image` que é uma subcomando do `kubectl` que permite atualizar as imagens dos contêineres em um recurso específico no cluster.
+```bash
+kubectl get service
+```
+
+
+Vamos utilizar o comando `set image` que é uma subcomando do `kubectl` que permite atualizar as imagens dos contêineres em um recurso específico no cluster. Documentação <https://kubernetes.io/docs/reference/kubectl/generated/kubectl_set/kubectl_set_image/>
 
 ```yaml
 kubectl set image statefulset/giropops-set nginx=nginx:1.19.0
