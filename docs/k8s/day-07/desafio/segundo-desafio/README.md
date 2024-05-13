@@ -132,7 +132,7 @@ spec:
     - protocol: TCP
       port: 6379
       targetPort: 6379 # O valor foi alterado de 6679 para 6379
-  type: ClusterIP
+  type: ClusterIP  
 ```
 
 statefulset-nginx.yaml
