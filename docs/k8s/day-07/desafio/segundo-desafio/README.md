@@ -121,28 +121,18 @@ spec:
 redis-service.yaml
 
 ```yaml
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  labels:
-    app: redis
-  name: redis-deployment
+  name: redis-service
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      app: redis
-  template:
-    metadata:
-      name: redis  # Nome da metadata foi adicionado como 'redis'
-      labels:
-        app: redis
-    spec:
-      containers:
-      - image: redis
-        name: redis
-        ports:
-          - containerPort: 6379  # O valor da porta do container foi alterado de 6579 para 6379
+    app: redis # selector app foi alterado de 'redis-service para 'redis'
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379 # O valor foi alterado de 6679 para 6379
+  type: ClusterIP
 ```
 
 statefulset-nginx.yaml
