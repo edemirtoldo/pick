@@ -30,7 +30,7 @@ Vamos criar o arquivo `statefulset-nginx.yaml` com o seguinte conteúdo:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: "giropops-set"
+  name: giropops-set
 spec:
   serviceName: "nginx-svc"
   replicas: 3
@@ -156,5 +156,3 @@ Events:
   Normal  SuccessfulCreate  48s (x2 over 107s)  statefulset-controller  create Pod giropops-set-0 in StatefulSet giropops-set successful
   ```
 
-Incorrect solution 1/1
-O manifest do StatefulSet do primeiro desafio não está com 'kind: StatefulSet' e/ou o nome 'giropops-set' !

@@ -32,12 +32,29 @@ spec:
         name: giropops-senhas
         ports:
         - containerPort: 5000
-        imagePullPolicy: Always
+        imagePullPolicy: Always        
 ```
 
 giropops-senhas-service.yaml 
 
 ```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: giropops-senhas
+  labels:
+    app: giropops-senhas
+spec:
+  selector:
+    app: giropops-senhas
+  ports:
+    - protocol: TCP
+      port: 5000
+      nodePort: 32500
+      targetPort: 5000
+      name: tcp-app
+  type: NodePort
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -134,9 +151,9 @@ statefulset-nginx.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: nginx  # O nome do StatefulSet foi alterado de 'giropops-set' para 'nginx'
+  name: giropops-set
 spec:
-  serviceName: "nginx"  # O serviceName foi alterado de 'nginx-svc' para 'nginx'
+  serviceName: "nginx-sv"
   replicas: 3
   selector:
     matchLabels:
@@ -164,11 +181,17 @@ spec:
           requests:
             storage: 1Gi
 ```
-
-
-comandos
+comandos:
 
 ```bash
+kubectl apply -f manifest/
+```
+
+ou
+
+```bash
+cd /manifest
+
 kubectl apply -f giropops-senhas-deployment.yaml
 
 kubectl apply -f giropops-senhas-service.yaml
