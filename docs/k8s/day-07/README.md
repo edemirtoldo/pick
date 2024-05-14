@@ -2,6 +2,8 @@
 
 ## Day-7 Kubernetes :rocket:
 
+## StatefulSets e Services
+
 ### O que iremos ver hoje?
 
 Hoje é dia de falar sobre dois resources muito importantes para o Kubernetes, o `StatefulSet` e o `Service`.
