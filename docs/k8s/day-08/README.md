@@ -176,4 +176,205 @@ username:  12 bytes
 password:  12 bytes
 ```
 
+### Colando o secret dentro de um pod
 
+Criando o `pod-secret.yaml`.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: giropops-pod
+spec:
+  containers:
+    - name: giropops-container
+      image: nginx
+      env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: giropops-test
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: giropops-test
+              key: password
+```
+
+Criando o Pod usando o comando `kubectl apply`:
+
+```bash
+kubectl apply -f pod-secret.yaml 
+```
+
+```bash
+kubectl get pods
+```
+O Resultado:
+
+```bash
+NAME           READY   STATUS    RESTARTS   AGE
+giropops-pod   1/1     Running   0          94s
+```
+Vamos ver os detahes deste pod:
+
+```bash
+kubectl describe pods giropops-pod 
+```
+
+```bash
+Name:             giropops-pod
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             giropops-worker/192.168.16.3
+Start Time:       Tue, 14 May 2024 13:37:36 -0300
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.1.2
+IPs:
+  IP:  10.244.1.2
+Containers:
+  giropops-container:
+    Container ID:   containerd://18fcaf7c8e33eb325ff9b6e6fcd5fd6b744172783fdedf6dbc22237bb071b591
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:32e76d4f34f80e479964a0fbd4c5b4f6967b5322c8d004e9cf0cb81c93510766
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 14 May 2024 13:37:41 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      USERNAME:  <set to the key 'username' in secret 'giropops-test'>  Optional: false
+      PASSWORD:  <set to the key 'password' in secret 'giropops-test'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hjth5 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-hjth5:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  3m14s  default-scheduler  Successfully assigned default/giropops-pod to giropops-worker
+  Normal  Pulling    3m13s  kubelet            Pulling image "nginx"
+  Normal  Pulled     3m9s   kubelet            Successfully pulled image "nginx" in 3.701840064s (3.701851747s including waiting)
+  Normal  Created    3m9s   kubelet            Created container giropops-container
+  Normal  Started    3m9s   kubelet            Started container giropops-container
+```
+
+Vamos acessar o pod para verificar se as variaveis de ambiente estão no pod.
+
+```bash
+kubectl exec -ti giropops-pod -- bash
+```
+Dentro do pod vamos executar o seguinte comando:
+
+```bash
+set
+```
+
+será apresentado o seguinte conteudo:
+
+```bash
+BASH=/usr/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extquote:force_fignore:globasciiranges:globskipdots:hostcomplete:interactive_comments:patsub_replacement:progcomp:promptvars:sourcepath
+BASH_ALIASES=()
+BASH_ARGC=([0]="0")
+BASH_ARGV=()
+BASH_CMDS=()
+BASH_LINENO=()
+BASH_LOADABLES_PATH=/usr/local/lib/bash:/usr/lib/bash:/opt/local/lib/bash:/usr/pkg/lib/bash:/opt/pkg/lib/bash:.
+BASH_SOURCE=()
+BASH_VERSINFO=([0]="5" [1]="2" [2]="15" [3]="1" [4]="release" [5]="x86_64-pc-linux-gnu")
+BASH_VERSION='5.2.15(1)-release'
+COLUMNS=72
+DIRSTACK=()
+EUID=0
+GROUPS=()
+HISTFILE=/root/.bash_history
+HISTFILESIZE=500
+HISTSIZE=500
+HOME=/root
+HOSTNAME=giropops-pod
+HOSTTYPE=x86_64
+IFS=$' \t\n'
+KUBERNETES_PORT=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
+KUBERNETES_PORT_443_TCP_PORT=443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_SERVICE_HOST=10.96.0.1
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_SERVICE_PORT_HTTPS=443
+LINES=14
+MACHTYPE=x86_64-pc-linux-gnu
+MAILCHECK=60
+NGINX_VERSION=1.25.5
+NJS_RELEASE=3~bookworm
+NJS_VERSION=0.8.4
+OPTERR=1
+OPTIND=1
+OSTYPE=linux-gnu
+PASSWORD=Z2lyb3BvcHM=
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PIPESTATUS=([0]="1")
+PKG_RELEASE=1~bookworm
+PPID=0
+PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+PS2='> '
+PS4='+ '
+PWD=/
+SHELL=/bin/bash
+SHELLOPTS=braceexpand:emacs:hashall:histexpand:history:interactive-comments:monitor
+SHLVL=1
+TERM=xterm
+UID=0
+USERNAME=bnVkZXJ2YWw=
+_=']'
+```
+
+Fora do pod podemos utilizar outro comando para ver as variaveis:
+
+```bash
+kubectl exec -ti giropops-pod -- env
+```
+O resultado será:
+
+```bash
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=giropops-pod
+NGINX_VERSION=1.25.5
+NJS_VERSION=0.8.4
+NJS_RELEASE=3~bookworm
+PKG_RELEASE=1~bookworm
+USERNAME=bnVkZXJ2YWw=
+PASSWORD=Z2lyb3BvcHM=
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
+KUBERNETES_SERVICE_HOST=10.96.0.1
+KUBERNETES_SERVICE_PORT=443
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_PORT_443_TCP_PORT=443
+TERM=xterm
+HOME=/root
+```
