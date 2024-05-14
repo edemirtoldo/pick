@@ -378,3 +378,53 @@ KUBERNETES_PORT_443_TCP_PORT=443
 TERM=xterm
 HOME=/root
 ```
+
+### Criando um Secret do tipo Docker Registry (dockercfg)
+Faça o login no Docker Hub:
+
+```bash
+docker login
+```
+
+Pegue o conteúdo do arquivo ~/.docker/config.json em base64:
+
+```bash
+cat ~/.docker/config.json | base64
+```
+
+Crie o arquivo secret.yaml:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dockerhub-secret
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: |
+    {CONTEÚDO DO ARQUIVO ~/.docker/config.json EM BASE64}
+```
+
+```bash
+kubectl apply -f secret.yaml
+```
+
+#### Utilizando um Secret do tipo Docker Registry (dockercfg) como variável de ambiente
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: giropops-pod
+spec:
+  containers:
+    - name: giropops-container
+      image: {DOCKERHUB_USERNAME}/{IMAGE_NAME}
+  imagePullSecrets:
+  - name: dockerhub-secret
+```
+
+```bash
+kubectl apply -f pod.yaml
+```
+
