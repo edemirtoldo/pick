@@ -12,24 +12,18 @@ Alguma coisa aconteceu e o Nginx que você configurou no desafio anterior não e
 
 Resposta:
 
-```bash
-kubectl describe pods nginx-https
-```
-
-
-
-
-```bash
-kubectl delete -f pod-nginx-https.yaml
-```
+Encontramos um problema no Secret, vamos remover o secret:
 
 ```bash
 kubectl delete secret nginx-secret
 ```
 
+Vamos criar um novo secret:
+
 ```bash
 kubectl create secret tls nginx-secret --cert=nginx.crt --key=nginx.key
 ```
+Vamos dar apply no pod:
 
 ```bash
 kubectl apply -f pod-nginx-https.yaml

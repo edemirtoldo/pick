@@ -45,7 +45,7 @@ IMPORTANTE: Todos os arquivos devem ser criados no diretório /root/manifests, i
 Vá para o diretório /manifests:
 
 ```bash
-cd /manifests
+cd manifests/
 ```
 
 Certificado e chave privada:
