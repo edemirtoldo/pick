@@ -404,7 +404,7 @@ data:
   .dockerconfigjson: |
     {CONTEÚDO DO ARQUIVO ~/.docker/config.json EM BASE64}
 ```
-
+exit
 ```bash
 kubectl apply -f secret.yaml
 ```
@@ -426,5 +426,238 @@ spec:
 
 ```bash
 kubectl apply -f pod.yaml
+```
+
+### Criando um Secret TLS
+
+O Secret kubernetes.io/tls, é usado para armazenar certificados TLS e chaves privadas. Eles são usados para fornecer segurança na comunicação entre os serviços no Kubernetes. Por exemplo, você pode usar um Secret TLS para configurar o HTTPS no seu serviço web.
+
+Para criar um Secret TLS, você precisa ter um certificado TLS e uma chave privada, e você precisa codificar o certificado e a chave privada em base64, para então criar o Secret.
+
+Vamos criar um Secret TLS para o nosso serviço web, mas para isso, você precisa ter um certificado TLS e uma chave privada antes de mais nada.
+
+Para criar um certificado TLS e uma chave privada, você pode usar o comando openssl:
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout chave-privada.key -out certificado.crt
+ ```
+Com o certificado TLS e a chave privada criados, vamos criar o nosso Secret, é somente para mudar um pouco, vamos criar o Secret usando o comando kubectl apply:
+
+```bash
+kubectl create secret tls meu-servico-web-tls-secret --cert=certificado.crt --key=chave-privada.key
+```
+resultado:
+
+```bash
+secret/meu-servico-web-tls-secret created
+```
+Vamos conferir o secret criado
+
+```bash
+kubectl get secrets meu-servico-web-tls-secret
+```
+Resultado:
+
+```bash
+NAME                         TYPE                DATA   AGE
+meu-servico-web-tls-secret   kubernetes.io/tls   2      108s
+```
+Ver em formaqto yaml
+
+```bash
+kubectl get secrets meu-servico-web-tls-secret -o yaml
+```
+
+Vamos criar o arquivo de configuração do Nginx chamado nginx.conf, que vai ser usado pelo ConfigMap:
+
+```bash
+events { } # configuração de eventos
+
+http { # configuração do protocolo HTTP, que é o protocolo que o Nginx vai usar
+  server { # configuração do servidor
+    listen 80; # porta que o Nginx vai escutar
+    listen 443 ssl; # porta que o Nginx vai escutar para HTTPS e passando o parâmetro ssl para habilitar o HTTPS
+    
+    ssl_certificate /etc/nginx/tls/certificado.crt; # caminho do certificado TLS
+    ssl_certificate_key /etc/nginx/tls/chave-privada.key; # caminho da chave privada
+
+    location / { # configuração da rota /
+      return 200 'Bem-vindo ao Nginx!\n'; # retorna o código 200 e a mensagem Bem-vindo ao Nginx!
+      add_header Content-Type text/plain; # adiciona o header Content-Type com o valor text/plain
+    } 
+  }
+}
+``` 
+
+Agora vamos criar o ConfigMap nginx-config com o arquivo de configuração do Nginx:
+
+```bash
+kubectl create configmap nginx-config --from-file=nginx.conf
+```
+Vamos verificar a criação:
+
+```bash
+kubectl get configmaps 
+```
+Resultado:
+
+```bash
+NAME               DATA   AGE
+kube-root-ca.crt   1      5d23h
+nginx-config       1      13s
+```
+
+```bash
+kubectl describe configmaps 
+```
+
+Criando um ConfigMap chamado nginx-config com o conteúdo do arquivo `configmap.yaml`. Podemos fazer a mesma coisa através de um manifesto, como no exemplo abaixo:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: default
+data:
+  nginx.conf: |
+    events { }
+
+    http {
+      server {
+        listen 80;
+        listen 443 ssl;
+
+        ssl_certificate /etc/nginx/tls/certificado.crt;
+        ssl_certificate_key /etc/nginx/tls/chave-privada.key;
+
+        location / {
+          return 200 'Bem-vindo ao Nginx!\n';
+          add_header Content-Type text/plain;
+        }
+      }
+    }
+```
+
+deededed
+
+
+Vamos fazer o apply
+
+```bash
+kubectl apply -f pod-configmap-secret.yaml 
+```
+
+```
+kubectl get pods
+```
+
+``` bash
+NAME           READY   STATUS    RESTARTS   AGE
+giropops-pod   1/1     Running   0          7s
+```
+
+```bash
+kubectl describe pods giropops-pod 
+```
+Resultado:
+
+```bash
+Name:             giropops-pod
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             giropops-worker/192.168.16.4
+Start Time:       Wed, 15 May 2024 12:23:26 -0300
+Labels:           app=nginx
+Annotations:      <none>
+Status:           Running
+IP:               10.244.1.3
+IPs:
+  IP:  10.244.1.3
+Containers:
+  giropops-container:
+    Container ID:   containerd://d6c7f0fd7d5d9bfe33779e69f0fa628a13f5b631d61b31a6e8a7046d53aeb214
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c
+    Ports:          80/TCP, 443/TCP
+    Host Ports:     0/TCP, 0/TCP
+    State:          Running
+      Started:      Wed, 15 May 2024 12:23:28 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /etc/nginx/nginx.conf from nginx-config-volume (rw,path="nginx.conf")
+      /etc/nginx/tls from nginx-tls (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6xnqb (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  nginx-config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      nginx-config
+    Optional:  false
+  nginx-tls:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  meu-servico-web-tls-secret
+    Optional:    false
+  kube-api-access-6xnqb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  79m   default-scheduler  Successfully assigned default/giropops-pod to giropops-worker
+  Normal  Pulling    79m   kubelet            Pulling image "nginx"
+  Normal  Pulled     79m   kubelet            Successfully pulled image "nginx" in 1.454994264s (1.455011385s including waiting)
+  Normal  Created    79m   kubelet            Created container giropops-container
+  Normal  Started    79m   kubelet            Started container giropops-container
+```
+
+Vamos fazer o expose:
+
+```bash
+kubectl expose pods giropops-pod 
+```
+
+```bash
+kubectl get service
+```
+Resultado:
+
+```bash
+NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+giropops-pod   ClusterIP   10.96.23.150   <none>        80/TCP,443/TCP   17s
+kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP          6d2h
+```
+
+Fazer um port-forward para um teste de acesso:
+
+```bash
+kubectl port-forward services/giropops-pod 4443:443
+```
+
+Vamos acessar o link no navegador:
+
+https://localhost:4443/
+
+ou
+
+```bash
+curl -k https://localhost:4443
+
+Bem-vindo ao Nginx!
 ```
 
