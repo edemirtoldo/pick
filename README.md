@@ -9,13 +9,13 @@ Acompanhe o meu progresso no PICK de 2024 nesse repositório. :rocket:
 
 ### Índice
 
-1. [Docker](https://github.com/edemirtoldo/pick/tree/main/docs/docker)
-    - [Day 1 - Containers, Namespaces, Cgroups e Imagens](https://github.com/edemirtoldo/pick/tree/main/docs/docker/day-1)
+### 1. [Docker](https://github.com/edemirtoldo/pick/tree/main/docs/docker)
+###    - [Day 1 - Containers, Namespaces, Cgroups e Imagens](https://github.com/edemirtoldo/pick/tree/main/docs/docker/day-1)
 
-2. [Kubernetes](https://github.com/edemirtoldo/pick/tree/main/docs/k8s)
-    - [Day 1 - Introdução](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-01)
-    - [Day 7 - StatefulSets e Services](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-07)
-    - [Day 8 - Secrets e ConfigMaps](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-08)
+## 2. [Kubernetes](https://github.com/edemirtoldo/pick/tree/main/docs/k8s)
+##    - [Day 1 - Introdução](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-01)
+##    - [Day 7 - StatefulSets e Services](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-07)
+##    - [Day 8 - Secrets e ConfigMaps](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-08)
 
 
 &nbsp;
