@@ -40,21 +40,28 @@ IMPORTANTE: Todos os arquivos devem ser criados no diretório /root/manifests, i
 
 🚀 Use as guias "Terminal", "Editor" e "Navegador" para concluir este desafio. Após concluir as instruções, pressione o botão Check para verificar se você solucionou o desafio corretamente.
 
-Desafio - parte 1
+### Desafio - parte 1 - Desafio Nginx com HTTPS no Kubernetes
 
-Criar um certificado TLS e uma chave privada:
+Vá para o diretório /manifests:
 
 ```bash
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt 
+cd /manifests
 ```
 
-Criar o Secret:
+Certificado e chave privada:
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx.key -out nginx.crt
+```
+
+Secret:
 
 ```bash
 kubectl create secret tls nginx-secret --cert=nginx.crt --key=nginx.key
 ```
 
-Criar o ConfigMap nginx-config:
+
+Configmap:
 
 ```bash
 vim nginx.conf
@@ -64,7 +71,7 @@ vim nginx.conf
 kubectl create configmap nginx-config --from-file=nginx.conf
 ```
 
-Criar o pod:
+Pod:
 
 ```bash
 vim pod-nginx-https.yaml
@@ -74,7 +81,7 @@ vim pod-nginx-https.yaml
 kubectl apply -f pod-nginx-https.yaml
 ```
 
-Criar o service:
+Service:
 
 ```bash
 vim nginx-service.yaml
@@ -83,40 +90,11 @@ vim nginx-service.yaml
 ```bash
 kubectl apply -f nginx-service.yaml
 ```
-XXXXXX
 
-
-Vamos fazer o expose:
+Verificar o https:
 
 ```bash
-kubectl expose pods giropops-pod 
-```
-
-```bash
-kubectl get service
-```
-Resultado:
-
-```bash
-NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-giropops-pod   ClusterIP   10.96.23.150   <none>        80/TCP,443/TCP   17s
-kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP          6d2h
-```
-
-Fazer um port-forward para um teste de acesso:
-
-```bash
-kubectl port-forward services/giropops-pod 4443:443
-```
-
-Vamos acessar o link no navegador:
-
-https://localhost:4443/
-
-ou
-
-```bash
-curl -k https://localhost:4443
+curl -k https://localhost:32400
 
 Bem-vindo ao Nginx!
 ```
