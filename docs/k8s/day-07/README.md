@@ -723,8 +723,12 @@ Espero que você tenha curtido o conteúdo de hoje e lembre-se de fazer a liçã
 
 Então é isso. Nos vemos no próximo dia, onde continuaremos nossa aventura nesse mundinho mágico do containers. Até lá! **#VAIIII**
 
+&nbsp;
 
 > O Conteudo faz parte do curso - PICK da LINUXTIPS
 >
 > Link da documentação: https://github.com/badtuxx/CertifiedContainersExpert.git
-
+>
+> Link da documentação: https://github.com/badtuxx/DescomplicandoKubernetes
+>
+> Link da documentação: https://github.com/badtuxx/DescomplicandoKubernetes
