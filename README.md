@@ -18,7 +18,7 @@ Acompanhe o meu progresso no PICK de 2024 nesse repositório. :rocket:
 ###    - [Day 1 - Introdução](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-01)
 ###    - [Day 7 - StatefulSets e Services](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-07)
 ###    - [Day 8 - Secrets e ConfigMaps](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-08)
-
+###    - [Day 9 - Prometheus + Kubernetes](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-09)
 
 &nbsp;
 

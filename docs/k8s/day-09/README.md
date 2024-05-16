@@ -2,7 +2,7 @@
 
 ## Day-9 Kubernetes :rocket:
 
-##  Prometheus e Kubernetes
+##  Prometheus + Kubernetes
 
 
 ### O que é Prometheus?
