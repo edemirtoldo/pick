@@ -84,26 +84,34 @@ Aplique os manifestos:
 kubectl create -f manifests/
 ```
 
-### Acessando o Prometheus
+Após a aplicação dos manifests, você pode verificar se os componentes foram implantados corretamente:
 
 ```bash
-kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+kubectl get pods -n monitoring
 ```
 
-Vai estar disponível em: http://localhost:9090
+Você deve ver pods para Prometheus, Alertmanager, Grafana, entre outros.
 
 ### Acessando o Grafana
 
 ```bash
-kubectl --namespace monitoring port-forward svc/grafana 3000
+kubectl --namespace monitoring port-forward svc/grafana 3000:3000
 ```
 
 Vai estar disponível em: http://localhost:3000
 
+### Acessando o Prometheus
+
+```bash
+kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090:9090
+```
+
+Vai estar disponível em: http://localhost:9090
+
 ### Acessando o Alertmanager
 
 ```bash
-kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
+kubectl --namespace monitoring port-forward svc/alertmanager-main 9093:9093
 ```
 
 Vai estar disponível em: http://localhost:9093
@@ -128,7 +136,3 @@ Adicione as seguintes linhas:
 fs.inotify.max_user_watches = 524288
 fs.inotify.max_user_instances = 512
 ```
-
-### O que é o ServiceMonitor?
-
-O ServiceMonitor é um recurso do Prometheus Operator que permite monitorar serviços e aplicações em execução no Kubernetes. Ele utiliza o Kubernetes para descobrir os alvos que devem ser monitorados e cria automaticamente os recursos necessários para coletar as métricas.
