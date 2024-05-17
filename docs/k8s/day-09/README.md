@@ -72,12 +72,6 @@ Crie o namespace e o CRDs:
 kubectl create -f manifests/setup
 ```
 
-Espere até que os CRDs sejam criados:
-
-```bash
-until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
-```
-
 Aplique os manifestos:
 
 ```bash
