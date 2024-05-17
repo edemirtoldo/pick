@@ -1,6 +1,6 @@
 ### Desafio parte 1
 
-### Descomplicando o Kubernetes e o Prometheus - Day-8
+### Descomplicando o Kubernetes e o Prometheus - Day-9
 
 ### 🚢 Deploy Kube-Prometheus
 

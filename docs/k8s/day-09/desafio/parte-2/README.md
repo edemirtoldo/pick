@@ -1,6 +1,6 @@
 ### Desafio parte 2
 
-### Descomplicando o Kubernetes e o Prometheus - Day-8
+### Descomplicando o Kubernetes e o Prometheus - Day-9
 
 ### 🖥️ Acessar o Grafana do nosso cluster
 
