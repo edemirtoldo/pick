@@ -8,7 +8,30 @@
 
 O ServiceMonitor é um recurso do Prometheus Operator que permite que você configure o Prometheus para monitorar um serviço. Ele é um Custom Resource Definition (CRD) que pode ser criado no Kubernetes. 
 
+### Verificando se o kube-prometheus está instalado
+
+```bash
+kubectl get customresourcedefinitions.apiextensions.k8s.io 
+```
+Resultado:
+
+```bash
+NAME                                        CREATED AT
+alertmanagerconfigs.monitoring.coreos.com   2024-05-17T14:01:00Z
+alertmanagers.monitoring.coreos.com         2024-05-17T14:01:00Z
+podmonitors.monitoring.coreos.com           2024-05-17T14:01:00Z
+probes.monitoring.coreos.com                2024-05-17T14:01:00Z
+prometheusagents.monitoring.coreos.com      2024-05-17T14:01:01Z
+prometheuses.monitoring.coreos.com          2024-05-17T14:01:01Z
+prometheusrules.monitoring.coreos.com       2024-05-17T14:01:01Z
+scrapeconfigs.monitoring.coreos.com         2024-05-17T14:01:01Z
+servicemonitors.monitoring.coreos.com       2024-05-17T14:01:01Z
+thanosrulers.monitoring.coreos.com          2024-05-17T14:01:01Z
+```
+
 ### Criando o Deployment e o Service para serem utilizados com o ServiceMonitor
+
+`nginx-deployment.yaml`
     
 ```yaml
 apiVersion: apps/v1
@@ -18,10 +41,10 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: nginx
+  replicas: 3    
   template:
     metadata:
       labels:
@@ -61,6 +84,8 @@ spec:
           name: nginx-config
 ```
 
+`nginx-configmap.yaml`
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -80,6 +105,8 @@ data:
       }
     }
 ```
+
+`nginx-service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -101,6 +128,8 @@ spec:
 ```
 
 ### Criando o ServiceMonitor
+
+`nginx-servicemonitor.yaml`
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
