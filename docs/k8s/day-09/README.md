@@ -72,6 +72,12 @@ Crie o namespace e o CRDs:
 kubectl create -f manifests/setup
 ```
 
+Aguarde até que os CRDs estejam prontos antes de continuar. Você pode verificar isso com o comando:
+
+```bash
+kubectl get crds | grep 'alertmanagers.monitoring.coreos.com\|podmonitors.monitoring.coreos.com\|probes.monitoring.coreos.com\|prometheuses.monitoring.coreos.com\|prometheusrules.monitoring.coreos.com\|servicemonitors.monitoring.coreos.com\|thanosrulers.monitoring.coreos.com'
+```
+
 Aplique os manifestos:
 
 ```bash
