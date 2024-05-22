@@ -114,7 +114,7 @@ docker build --build-arg HTTP_PROXY=http://proxy.example.com .
 docker build --no-cache -t myimage:latest .
 ```
 
-### Vamos criar a imagem com docker build
+### Vamos criar a imagem com docker build do primeiro dockerfile
 
 ```bash
 docker image build -t meu-nginx:1.0 .
@@ -138,44 +138,52 @@ docker container run -d -p 8080:80 --name meu-nginx:1.0
 docker container ls
 ```
 
-
-
-----
+### Segundo Dockerfile
 
 ```dockerfile
-# Define a imagem base
 FROM ubuntu:18.04
-
-# Define o mantenedor da imagem
-LABEL maintainer="edemirtoldo@gmail.com"
-
-# Executa um comando
-RUN apt-get update && apt-get install -y nginx curl
-
-# Define a porta que o container irá expor
+RUN apt-get update && apt-get install nginx -y && rm -rf /var/lib/apt/lists/*
 EXPOSE 80
-
-# Define o diretório de trabalho
+COPY index.html /var/www/html/
+CMD ["nginx", "-g", "daemon off;"]
 WORKDIR /var/www/html
-
-# Adiciona arquivos para o container
-ADD node_exporter-1.6.0.linux-amd64.tar.gz /root/node-exporter
-
-# Copia um arquivo do host para o container (Não esquecer de criar o arquivo index.html)
-COPY index.html .
-
-# Adiciona uma variável de ambiente
 ENV APP_VERSION 1.0.0
-
-# Exectando o Entrypoint
-ENTRYPOINT ["nginx"]
-
-# Define o comando que será executado quando o container for iniciado
-CMD ["-g", "daemon off;"]
-
-# Exectando o Healthcheck
-HEALTHCHECK --interval=5s --timeout=3s CMD curl -f http://localhost/ || exit 1
 ```
+
+Arquivo `index.html`
+
+```bash
+GIROPOPS STRIGUS GIRUS
+```
+
+### Vamos criar a imagem com docker build do segundo dockerfile
+
+```bash
+docker image build -t meu-nginx:2.0 .
+```
+
+### Vamos executar o `docker contaienr run`
+
+```bash
+docker container run -d -p 8888:80 --name meu-nginx:2.0
+```
+
+### Vamos consultar o container que foi executado
+
+```bash
+docker container ls
+```
+ou
+
+```bash
+docker ps
+```
+
+
+
+
+-----------
+
 
 ### Glossário de Dockerfile
 
