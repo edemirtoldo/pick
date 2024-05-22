@@ -67,7 +67,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 Este Dockerfile cria um contêiner baseado no Ubuntu 18.04, atualiza a lista de pacotes, instala o Nginx, expõe a porta 80 e configura o Nginx para rodar em primeiro plano. Com esse contêiner, você terá um servidor web Nginx pronto para servir conteúdo na porta 80.
 
-### Vamos executar o docker build 
+### Docker Build 
 
 O comando docker build é usado para construir uma imagem Docker a partir de um Dockerfile. Aqui está uma descrição detalhada de como ele funciona e alguns dos seus principais aspectos:
 
@@ -114,7 +114,29 @@ docker build --build-arg HTTP_PROXY=http://proxy.example.com .
 docker build --no-cache -t myimage:latest .
 ```
 
+### Vamos criar a imagem com docker build
 
+```bash
+docker image build -t meu-nginx:1.0 .
+```
+
+### Como consultar a imagem criada
+
+```bash
+docker image ls
+```
+
+### Vamos executar esse container
+
+```bash
+docker container run -d -p 8080:80 --name meu-nginx:1.0
+```
+
+### Como consultar o container que foi executado
+
+```bash
+docker container ls
+```
 
 
 
