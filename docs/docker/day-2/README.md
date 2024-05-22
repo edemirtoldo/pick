@@ -67,6 +67,56 @@ CMD ["nginx", "-g", "daemon off;"]
 
 Este Dockerfile cria um contêiner baseado no Ubuntu 18.04, atualiza a lista de pacotes, instala o Nginx, expõe a porta 80 e configura o Nginx para rodar em primeiro plano. Com esse contêiner, você terá um servidor web Nginx pronto para servir conteúdo na porta 80.
 
+### Vamos executar o docker build 
+
+O comando docker build é usado para construir uma imagem Docker a partir de um Dockerfile. Aqui está uma descrição detalhada de como ele funciona e alguns dos seus principais aspectos:
+
+Comando Básico
+bash
+Copiar código
+
+```bash
+docker build [OPTIONS] PATH | URL | -
+```
+
+**Descrição**
+
+- **Construção da Imagem:* O comando `docker build` lê as instruções contidas no Dockerfile (localizado no diretório especificado pelo `PATH`) e monta uma nova imagem Docker com base nessas instruções.
+
+- **PATH | URL | -:**
+
+    - `PATH`: Especifica o caminho para o diretório que contém o Dockerfile.
+    - `URL`: Pode apontar para um repositório remoto contendo o Dockerfile.
+    - `-`: Lê o Dockerfile do input padrão (stdin).
+
+**Principais Opções**
+- `-t, --tag`: Nomeia e marca a imagem criada. Pode ser usada várias vezes para aplicar várias tags à imagem.
+
+```bash
+docker build -t myimage:latest .
+```
+
+- `-f, --file`: Permite especificar um Dockerfile que não esteja no diretório padrão.
+
+```bash
+docker build -f /path/to/Dockerfile .
+```
+
+- `--build-arg`: Define variáveis de ambiente para a construção da imagem. Essas variáveis podem ser usadas dentro do Dockerfile.
+
+```bash
+docker build --build-arg HTTP_PROXY=http://proxy.example.com .
+```
+
+- `--no-cache`: Não utiliza a cache ao criar a imagem, garantindo que cada instrução do Dockerfile seja executada novamente.
+
+```bash
+docker build --no-cache -t myimage:latest .
+```
+
+
+
+
 
 ----
 
