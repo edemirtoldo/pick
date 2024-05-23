@@ -24,7 +24,7 @@ Criando diretorio
 mkdir Dockerfile
 cd Dockerfile
 ```
-Arquivo `Dockerfile` deve ser sempre utilizado 
+Arquivo `Dockerfile` é importante notar que a convenção padrão é usar "Dockerfile" com a inicial maiúscula. Utilizar a convenção padrão facilita a compreensão e a colaboração em projetos, pois outras pessoas estão acostumadas a procurar por "Dockerfile". 
 
 ```dockerfile
 FROM ubuntu:18.04
