@@ -14,25 +14,16 @@ Tecnicamente, o Ingress atua como uma abstração de regras de roteamento de alt
 
 **Controlador de Ingress:** É a implementação real que satisfaz um recurso Ingress. Ele pode ser implementado através de várias soluções de proxy reverso, como NGINX ou HAProxy.
 
-Regras de Roteamento: Definidas em um objeto YAML, essas regras determinam como as requisições externas devem ser encaminhadas aos serviços internos.
+**Regras de Roteamento:** Definidas em um objeto YAML, essas regras determinam como as requisições externas devem ser encaminhadas aos serviços internos.
 
-Backend Padrão: Um serviço de fallback para onde as requisições são encaminhadas se nenhuma regra de roteamento for correspondida.
+**Backend Padrão:** Um serviço de fallback para onde as requisições são encaminhadas se nenhuma regra de roteamento for correspondida.
 
-Balanceamento de Carga: Distribuição automática de tráfego entre múltiplos pods de um serviço.
+**Balanceamento de Carga:** Distribuição automática de tráfego entre múltiplos pods de um serviço.
 
-Terminação SSL/TLS: O Ingress permite a configuração de certificados SSL/TLS para a terminação de criptografia no ponto de entrada do cluster.
+**Terminação SSL/TLS:** O Ingress permite a configuração de certificados SSL/TLS para a terminação de criptografia no ponto de entrada do cluster.
 
-Anexos de Recurso: Possibilidade de anexar recursos adicionais como ConfigMaps ou Secrets, que podem ser utilizados para configurar comportamentos adicionais como autenticação básica, listas de controle de acesso etc.
+**Anexos de Recurso:** Possibilidade de anexar recursos adicionais como ConfigMaps ou Secrets, que podem ser utilizados para configurar comportamentos adicionais como autenticação básica, listas de controle de acesso etc.
 
-
-
-------
-
-### O que é Ingress?
-
-O Ingress é um recurso do Kubernetes que gerencia o acesso externo aos serviços dentro de um cluster. Ele funciona como uma camada de roteamento HTTP/HTTPS, permitindo a definição de regras para direcionar o tráfego externo para diferentes serviços back-end.
-
-O Ingress pode fornecer balanceamento de carga, terminação SSL e hospedagem virtual baseada em nome.
 
 ### Configurando o Kind para usar o Ingress
 
