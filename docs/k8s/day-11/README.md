@@ -223,4 +223,13 @@ Aqui está a resposta para a pergunta 1.
 <p>Aqui está a resposta para a pergunta 3.</p>
 </details>
 
+-----
+
+# Perguntas e Respostas
+
+- [Pergunta 1](perguntas/pergunta1.md)
+- [Pergunta 2](perguntas/pergunta2.md)
+- [Pergunta 3](perguntas/pergunta3.md)
+
+
 
