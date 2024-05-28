@@ -192,4 +192,13 @@ spec:
               number: 5000
 ```
 
-Para que o Ingress funcione corretamente, precisamos substituir o valor `{DOMAIN_NAME}` por um domínio válido. Inserindo uma entrada do tipo 'CNAME' no seu provedor de DNS, apontando para o endereço do Load Balancer do Ingress. 
+Para que o Ingress funcione corretamente, precisamos substituir o valor `{DOMAIN_NAME}` por um domínio válido. Inserindo uma entrada do tipo 'CNAME' no seu provedor de DNS, apontando para o endereço do Load Balancer do Ingress.
+
+
+# Perguntas e Respostas
+
+## Pergunta 1
+<details>
+<summary>Clique para ver a resposta</summary>
+Aqui está a resposta para a pergunta 1.
+</details>
