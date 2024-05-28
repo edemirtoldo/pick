@@ -205,19 +205,22 @@ Aqui está a resposta para a pergunta 1.
 
 # Perguntas e Respostas
 
-| Pergunta | Resposta |
-|----------|----------|
-| Pergunta 1 | [Clique aqui para ver a resposta](#resposta-1) |
-| Pergunta 2 | [Clique aqui para ver a resposta](#resposta-2) |
-| Pergunta 3 | [Clique aqui para ver a resposta](#resposta-3) |
+## Pergunta 1
+<details>
+<summary>Clique para ver a resposta</summary>
+<p>Aqui está a resposta para a pergunta 1.</p>
+</details>
 
-## Respostas
+## Pergunta 2
+<details>
+<summary>Clique para ver a resposta</summary>
+<p>Aqui está a resposta para a pergunta 2.</p>
+</details>
 
-### Resposta 1
-Aqui está a resposta para a pergunta 1.
+## Pergunta 3
+<details>
+<summary>Clique para ver a resposta</summary>
+<p>Aqui está a resposta para a pergunta 3.</p>
+</details>
 
-### Resposta 2
-Aqui está a resposta para a pergunta 2.
 
-### Resposta 3
-Aqui está a resposta para a pergunta 3.
