@@ -202,3 +202,22 @@ Para que o Ingress funcione corretamente, precisamos substituir o valor `{DOMAIN
 <summary>Clique para ver a resposta</summary>
 Aqui está a resposta para a pergunta 1.
 </details>
+
+# Perguntas e Respostas
+
+| Pergunta | Resposta |
+|----------|----------|
+| Pergunta 1 | [Clique aqui para ver a resposta](#resposta-1) |
+| Pergunta 2 | [Clique aqui para ver a resposta](#resposta-2) |
+| Pergunta 3 | [Clique aqui para ver a resposta](#resposta-3) |
+
+## Respostas
+
+### Resposta 1
+Aqui está a resposta para a pergunta 1.
+
+### Resposta 2
+Aqui está a resposta para a pergunta 2.
+
+### Resposta 3
+Aqui está a resposta para a pergunta 3.
