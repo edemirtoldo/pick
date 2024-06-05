@@ -103,7 +103,9 @@ kubectl apply -f redis-deployment.yaml
 kubectl apply -f redis-service.yaml
 ```
 
-Agora, vamos criar o Ingress propriamente dito. Para isso, vamos utilizar o arquivo `ingress.yaml`:
+#### Agora, vamos criar o Ingress propriamente dito. 
+
+Para isso, vamos criar nosso primeiro arquivo `ingress-1.yaml`:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -126,7 +128,7 @@ spec:
 ```
 
 ```bash
-kubectl apply -f ingress.yaml
+kubectl apply -f ingress-1.yaml
 ```
 
 ### Criando multiplos Ingress no mesmo Ingress Controller
