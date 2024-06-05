@@ -109,14 +109,14 @@ Agora, vamos criar o Ingress propriamente dito. Para isso, vamos utilizar o arqu
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: giropops-senhas-ingress
+  name: giropops-senhas
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /giropops-senhas
         pathType: Prefix
         backend:
           service:
