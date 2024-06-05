@@ -94,7 +94,7 @@ Para instalar o Ingress NGINX Controller em um cluster que não seja o Kind, voc
 
 ### Criando um Ingress
 
-Para criar um Ingress, precisamos ter um serviço rodando no cluster. Para isso, vamos criar um deployment e um serviço do Giropops Senha + Redis com os seguintes comandos (execute os comandos no diretório `/home/edemir/pick/docs/k8s/day-11/files` pois os arquivos de configuração estão nesse diretório):
+Para criar um Ingress, precisamos ter um serviço rodando no cluster. Para isso, vamos criar um deployment e um serviço do Giropops Senha + Redis com os seguintes comandos (execute os comandos no diretório `pick/docs/k8s/day-11/files` pois os arquivos de configuração estão nesse diretório):
 
 ```bash
 kubectl apply -f app-deployment.yaml
