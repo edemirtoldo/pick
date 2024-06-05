@@ -312,7 +312,7 @@ Será apresentado a tela corretamente.
 Vamos criar um pod do nginx manualmente para simular mais um site.
 
 ```bash
-kubectl nginx --image nginx --port 80
+kubectl run nginx --image nginx --port 80
 ```
 
 Consultar o pod criado
