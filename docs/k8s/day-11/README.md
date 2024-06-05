@@ -127,9 +127,61 @@ spec:
               number: 5000
 ```
 
+Vamos fazer o deploy deste ingress.
+
 ```bash
 kubectl apply -f ingress-1.yaml
 ```
+
+Vamos consultar o ingress.
+
+```bash
+kubectl get ingress
+```
+
+Será exibido do seguinte conteudo:
+
+``` bash
+NAME              CLASS    HOSTS   ADDRESS     PORTS   AGE
+giropops-senhas   <none>   *       localhost   80      3m36s
+```
+
+Vamos ver detalhes deste ingress.
+
+``` bash
+kubectl describe ingress giropops-senhas
+```
+Será exibido o seguinte conteúdo.
+
+``` bash
+Name:             giropops-senhas
+Labels:           <none>
+Namespace:        default
+Address:          localhost
+Ingress Class:    <none>
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *
+              /giropops-senhas   giropops-senhas:5000 (10.244.0.8:5000,10.244.0.9:5000)
+Annotations:  nginx.ingress.kubernetes.io/rewrite-target: /
+Events:
+  Type    Reason  Age                    From                      Message
+  ----    ------  ----                   ----                      -------
+  Normal  Sync    7m29s (x2 over 7m32s)  nginx-ingress-controller  Scheduled for sync
+```
+
+Verificamos que no Address temos o endereço do nosso endereço do nosso ingress. (`localhost`)
+
+Basta acessar o link: http://localhost/giropops-senhas
+
+Mas notamos um erro na pagina:
+
+![ingress-1](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-1.png)
+
+
+
 
 ### Criando multiplos Ingress no mesmo Ingress Controller
 
