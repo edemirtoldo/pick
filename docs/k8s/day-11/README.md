@@ -333,16 +333,9 @@ Vamos consultar o service criado.
 kubectl get service
 ```
 
-Agora vamos criar mais um ingress para este pod nginx criado.
+Agora vamos criar mais um ingress para este pod nginx criado. `ìngress-4.yaml`
 
 ```bash
-
-
-```
-
-
-
-```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -351,8 +344,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: giropops.nginx.io
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -363,11 +355,16 @@ spec:
               number: 80
 ```
 
+Vamos rodar o seguinte comando.
+
 ```bash
-kubectl apply -f ingress-nginx.yaml
+kubectl apply -f ingress-4.yaml
 ```
 
-### Contexts no Kubernetes
+
+
+
+## Contexts no Kubernetes
 
 Contexts são uma forma de organizar e acessar múltiplos clusters Kubernetes. Eles são úteis quando você precisa acessar mais de um cluster Kubernetes, seja localmente ou em um ambiente de produção.
 
