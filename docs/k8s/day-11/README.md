@@ -278,13 +278,19 @@ spec:
               number: 5000
 ```
 
+Vamos rodar o seguinte comando.
+
 ```bash
 kubectl apply -f ingress-3.yaml
 ```
 
+Vamos consultar o ingress.
+
 ```bash
 kubectl get ingress
 ```
+
+Resultado.
 
 ```bash
 NAME              CLASS    HOSTS   ADDRESS     PORTS   AGE
@@ -303,7 +309,38 @@ Será apresentado a tela corretamente.
 
 ### Criando multiplos Ingress no mesmo Ingress Controller
 
-Para criar multiplos Ingress no mesmo Ingress Controller, precisamos utilizar o recurso `host` do Ingress.
+Vamos criar um pod do nginx manualmente para simular mais um site.
+
+```bash
+kubectl nginx --image --port 80
+```
+
+Consultar o pod criado
+
+```bash
+kubectl get pods
+```
+
+Vamos criar o serviço.
+
+```bash
+kubectl expose pod nginx
+```
+
+Vamos consultar o service criado.
+
+```bash
+kubectl get service
+```
+
+Agora vamos criar mais um ingress para este pod nginx criado.
+
+```bash
+
+
+```
+
+
 
 ```yaml
 apiVersion: networking.k8s.io/v1
