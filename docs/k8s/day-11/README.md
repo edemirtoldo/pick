@@ -176,12 +176,130 @@ Verificamos que no Address temos o endereço do nosso endereço do nosso ingress
 
 Basta acessar o link: http://localhost/giropops-senhas
 
-Mas notamos um erro na pagina:
+Notamos um erro na pagina, algo quebrou:
 
 ![ingress-1](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-1.png)
 
+Vamos criar outro ingress `ingress-2.yaml`
 
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: giropops-senhas-static
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /static
+        pathType: Prefix
+        backend:
+          service:
+            name: giropops-senhas
+            port:
+              number: 5000
+```
 
+Vamos rodar o seguinte comando:
+
+```bash
+ kubectl apply -f ingress-2.yaml
+```
+
+Vamos consultar os ingress.
+
+```bash
+kubectl get ingress
+```
+
+Resultado.
+
+```bash
+NAME                     CLASS    HOSTS   ADDRESS     PORTS   AGE
+giropops-senhas          <none>   *       localhost   80      45m
+giropops-senhas-static   <none>   *                   80      20s
+```
+
+Vamos acessar novamente o link: http://localhost/giropops-senhas
+
+Notamos que a pagina abriu sem erros.
+
+![ingress-2](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-2.png)
+
+Mas ao clicar no botão Gerar da erro.
+
+![ingress-2a](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-2a.png)
+
+O erro foi para o backend default do nginx.
+
+Vamos remover os ingress.
+
+```bash
+ kubectl get ingress
+```
+
+```bash
+NAME                     CLASS    HOSTS   ADDRESS     PORTS   AGE
+giropops-senhas          <none>   *       localhost   80      83m
+giropops-senhas-static   <none>   *       localhost   80      16m
+```
+
+Remover o ingress `giropops-senhas`
+
+```bash
+kubectl delete ingress giropops-senhas
+```
+
+Remover o ingress `giropops-senhas-static`
+
+```bash
+kubectl delete ingress giropops-senhas-static
+```
+
+Para resolver o problema vamos criar um novo ingress `ingress-3.yaml`
+
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: giropops-senhas
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: giropops-senhas
+            port:
+              number: 5000
+```
+
+```bash
+kubectl apply -f ingress-3.yaml
+```
+
+```bash
+kubectl get ingress
+```
+
+```bash
+NAME              CLASS    HOSTS   ADDRESS     PORTS   AGE
+giropops-senhas   <none>   *       localhost   80      70s
+```
+
+Agora vamos testar o acesso a aplicação, mas vamos direto com o `localhost`
+
+Acesse o link: http://localhost/
+
+Será apresentado a tela corretamente.
+
+![ingress-3](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-3.png)
+
+### Caso você tenha mais de um site.
 
 ### Criando multiplos Ingress no mesmo Ingress Controller
 
