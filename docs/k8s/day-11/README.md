@@ -2,7 +2,7 @@
 
 ## Day-11 Kubernetes :rocket:
 
-##  Ingress e Contexts 
+##  Ingress no Kubernetes 
 
 ### O que é o Ingress?
 
@@ -29,6 +29,8 @@ Tecnicamente, o Ingress atua como uma abstração de regras de roteamento de alt
 
 Por padrão, o Kind não vem com o Ingress habilitado. Para habilitá-lo, precisamos criar um arquivo de configuração do Kind com o seguinte conteúdo:
 
+`kind-com-ingress.yaml`
+
 ```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -54,7 +56,7 @@ O arquivo de configuração acima habilita o Ingress e mapeia as portas 80 e 443
 Para criar o cluster com o arquivo de configuração acima, execute o seguinte comando:
 
 ```bash
-kind create cluster --config kind-ingress.yaml
+kind create cluster --config kind-com-ingress.yaml
 ```
 
 ### Instalando o [Ingress NGINX Controller no Kind](https://kind.sigs.k8s.io/docs/user/ingress/#ingress-nginx)
