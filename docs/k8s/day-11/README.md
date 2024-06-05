@@ -344,7 +344,8 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - http:
+  - host: giropops.nginx.io
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -360,6 +361,92 @@ Vamos rodar o seguinte comando.
 ```bash
 kubectl apply -f ingress-4.yaml
 ```
+
+Consultar os ingress.
+
+```bash
+kubectl get ingress
+NAME              CLASS    HOSTS               ADDRESS     PORTS   AGE
+giropops-senhas   <none>   *                   localhost   80      38m
+nginx             <none>   giropops.nginx.io               80      13s
+```
+
+Agora precisamos definir um apelido no hosts da maquina.
+
+```bash
+sudo vim /etc/hosts
+```
+
+Incluir a linha
+
+```bash
+127.0.0.1       giropops.nginx.io
+```
+
+Vamos acessar o seguinte link: http://giropops.nginx.io/
+
+![ingress-4](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-4.png)
+
+Conseguimos acessar diretamente a url `ǵiropops.nginx.io`
+
+Vamos incluir no hosts um novo alias para 'giropops-senhas.io` no hosts 
+
+```bash
+sudo vim /etc/hosts
+```
+
+incluindo o seguinte conteúdo.
+
+```bash
+127.0.0.1       giropops-senhas.io
+```
+
+Vamos criar um novo ingress para essa regra `ingress-5.yaml`
+
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: giropops-senhas
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: giropops-senhas.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: giropops-senhas
+            port:
+              number: 5000
+```
+
+Vamos rodar o seguinte comando.
+
+```bash
+kubectl apply -f ingress-5.yaml
+```
+
+Vamos consultar o ingress.
+
+```bash
+kubectl get ingress
+```
+
+Resultado.
+
+```bash
+NAME              CLASS    HOSTS                ADDRESS     PORTS   AGE
+giropops-senhas   <none>   giropops-senhas.io   localhost   80      60m
+nginx             <none>   giropops.nginx.io    localhost   80      22m
+```
+
+Agora vamos acessar o seguinte link: http://giropops-senhas.io/
+
+![ingress-5](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-5.png)
 
 
 
