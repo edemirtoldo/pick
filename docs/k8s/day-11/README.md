@@ -76,11 +76,25 @@ kubectl wait --namespace ingress-nginx \
   --timeout=90s
 ```
 
+Para verificar se o Ingress foi criado no Kind, execute o seguinte comando:
+
+```bash
+ kubectl get pods -n ingress-nginx
+```
+Será apresentado o seguitne conteudo:
+
+```bash
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-bn7zw        0/1     Completed   0          79s
+ingress-nginx-admission-patch-jxzzq         0/1     Completed   0          79s
+ingress-nginx-controller-6b7956cff5-n8j2m   1/1     Running     0          79s
+```
+
 Para instalar o Ingress NGINX Controller em um cluster que não seja o Kind, você pode seguir as instruções ds [documentação oficial](https://kubernetes.github.io/ingress-nginx/deploy/).
 
 ### Criando um Ingress
 
-Para criar um Ingress, precisamos ter um serviço rodando no cluster. Para isso, vamos criar um deployment e um serviço do Giropops Senha + Redis com os seguintes comandos (execute os comandos no diretório `kubernetes/Day-11/manisfests` pois os arquivos de configuração estão nesse diretório):
+Para criar um Ingress, precisamos ter um serviço rodando no cluster. Para isso, vamos criar um deployment e um serviço do Giropops Senha + Redis com os seguintes comandos (execute os comandos no diretório `/home/edemir/pick/docs/k8s/day-11/files` pois os arquivos de configuração estão nesse diretório):
 
 ```bash
 kubectl apply -f app-deployment.yaml
