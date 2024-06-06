@@ -450,13 +450,61 @@ Agora vamos acessar o seguinte link: http://giropops-senhas.io/
 
 ## Instalando um cluster para os nossos testes com ingress
 
-Comano para criar o cluster EKS na AWS.
+Comando para criar um cluster EKS na AWS. 
 
 ```bash
 eksctl create cluster --name=eks-cluster --version=1.24 --region=us-east-1 --nodegroup-name=eks-cluster-nodegroup --node-type=t3.medium --nodes=2 --nodes-min=1 --nodes-max=3 --managed
 ```
 
-Demora uns 20 minutos para o cluster ser criado.
+#### Componentes do Comando
+
+1. `eksctl create cluster`:
+
+- `eksctl` é uma ferramenta de linha de comando para simplificar a criação e o gerenciamento de clusters EKS.
+
+- create cluster é o subcomando que cria um novo cluster EKS.
+
+2. `--name=eks-cluster`:
+
+- Especifica o nome do cluster a ser criado. Neste caso, o nome é eks-cluster.
+
+3. `--version=1.24`:
+
+- Define a versão do Kubernetes a ser usada no cluster. Aqui, a versão é 1.24.
+
+4. `--region=us-east-1`:
+
+- Especifica a região da AWS onde o cluster será criado. Neste caso, a região é us-east-1.
+
+5. `--nodegroup-name=eks-cluster-nodegroup`:
+
+- Define o nome do grupo de nós (nodegroup) dentro do cluster. O nome aqui é eks-cluster-nodegroup.
+
+6. `--node-type=t3.medium`:
+
+- Especifica o tipo de instância EC2 a ser usado para os nós do cluster. Aqui, o tipo de instância é t3.medium.
+
+7. `--nodes=2`:
+
+- Define o número inicial de nós no cluster. Este valor inicial é 2.
+
+8. `--nodes-min=1`:
+
+- Especifica o número mínimo de nós no grupo de nós. O valor mínimo aqui é 1.
+
+9. `--nodes-max=3`:
+
+- Define o número máximo de nós no grupo de nós. O valor máximo aqui é 3.
+
+10. `--managed`:
+
+- Indica que os nós do cluster serão gerenciados pela AWS. Isso significa que a AWS se encarregará de tarefas como a aplicação de patches e upgrades para os nós.
+
+#### Resumo
+
+Este comando cria um cluster Kubernetes gerenciado pela AWS (EKS) na região `us-east-1` com o nome `eks-cluster`. O cluster usará a `versão 1.24` do Kubernetes e terá um grupo de nós (nodegroup) chamado `eks-cluster-nodegroup`. O grupo de nós usará instâncias EC2 do tipo `t3.medium`, começará com `2 nós`, e pode `escalar entre 1 e 3` nós conforme necessário.
+
+> Demora uns 20 minutos para o cluster ser criado.
 
 ## Contexts no Kubernetes
 
