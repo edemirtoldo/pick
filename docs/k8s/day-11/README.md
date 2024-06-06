@@ -535,8 +535,35 @@ Para instalar o Ingress NGINX Controller no EKS, precisamos executar os seguinte
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
 ```
+
 Clique [aqui](https://kubernetes.github.io/ingress-nginx/deploy/#aws) para acessar à documentação sobre a instalação do ingress controller `NETWORK LOAD BALANCER (NLB)` na AWS.
 
+Para consultar se foi instalado corretamente.
+
+```bash
+kubectl get pods -n ingress-nginx
+```
+
+Vamos consultar o EXTERNAL-IP do nosso Ingress NGINX Controller.
+
+```bash
+kubectl get service -n ingress-nginx
+```
+
+Para criar um Ingress, precisamos ter um serviço rodando no cluster. Para isso, vamos criar um deployment e um serviço do Giropops Senha + Redis com os seguintes comandos (execute os comandos no diretório `pick/docs/k8s/day-11/files` pois os arquivos de configuração estão nesse diretório):
+
+```bash
+kubectl apply -f app-deployment.yaml
+kubectl apply -f app-service.yaml
+kubectl apply -f redis-deployment.yaml
+kubectl apply -f redis-service.yaml
+```
+
+Vamos consultar nossos services.
+
+```bash
+kubectl get svc
+```
 
 ### Criando um Ingress no EKS
 
@@ -546,7 +573,7 @@ Para criar um Ingress no EKS, precisamos criar um arquivo de configuração do I
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: giropops-senhas-eks-ingress
+  name: giropops-senhas
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
