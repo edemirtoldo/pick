@@ -533,8 +533,10 @@ kubectl config use-context <context-name>
 Para instalar o Ingress NGINX Controller no EKS, precisamos executar os seguintes comandos. Não esqueça de mudar o contexto para o cluster EKS antes de executar os comandos:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/aws/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
 ```
+Clique [aqui](https://kubernetes.github.io/ingress-nginx/deploy/#aws) para acessar à documentação sobre a instalação do ingress controller `NETWORK LOAD BALANCER (NLB)` na AWS.
+
 
 ### Criando um Ingress no EKS
 
@@ -563,43 +565,5 @@ spec:
 ```
 
 Para que o Ingress funcione corretamente, precisamos substituir o valor `{DOMAIN_NAME}` por um domínio válido. Inserindo uma entrada do tipo 'CNAME' no seu provedor de DNS, apontando para o endereço do Load Balancer do Ingress.
-
-
-# Perguntas e Respostas
-
-## Pergunta 1
-<details>
-<summary>Clique para ver a resposta</summary>
-Aqui está a resposta para a pergunta 1.
-</details>
-
-# Perguntas e Respostas
-
-## Pergunta 1
-<details>
-<summary>Clique para ver a resposta</summary>
-<p>Aqui está a resposta para a pergunta 1.</p>
-</details>
-
-## Pergunta 2
-<details>
-<summary>Clique para ver a resposta</summary>
-<p>Aqui está a resposta para a pergunta 2.</p>
-</details>
-
-## Pergunta 3
-<details>
-<summary>Clique para ver a resposta</summary>
-<p>Aqui está a resposta para a pergunta 3.</p>
-</details>
-
------
-
-# Perguntas e Respostas
-
-- [Pergunta 1](perguntas/pergunta1.md)
-- [Pergunta 2](perguntas/pergunta2.md)
-- [Pergunta 3](perguntas/pergunta3.md)
-
 
 
