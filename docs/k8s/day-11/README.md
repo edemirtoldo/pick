@@ -460,45 +460,45 @@ eksctl create cluster --name=eks-cluster --version=1.24 --region=us-east-1 --nod
 
 1. `eksctl create cluster`:
 
-  - `eksctl` é uma ferramenta de linha de comando para simplificar a criação e o gerenciamento de clusters EKS.
+    - `eksctl` é uma ferramenta de linha de comando para simplificar a criação e o gerenciamento de clusters EKS.
 
-  - create cluster é o subcomando que cria um novo cluster EKS.
+    - create cluster é o subcomando que cria um novo cluster EKS.
 
 2. `--name=eks-cluster`:
 
-  - Especifica o nome do cluster a ser criado. Neste caso, o nome é eks-cluster.
+    - Especifica o nome do cluster a ser criado. Neste caso, o nome é eks-cluster.
 
 3. `--version=1.24`:
 
-  - Define a versão do Kubernetes a ser usada no cluster. Aqui, a versão é 1.24.
+    - Define a versão do Kubernetes a ser usada no cluster. Aqui, a versão é 1.24.
 
 4. `--region=us-east-1`:
 
-  - Especifica a região da AWS onde o cluster será criado. Neste caso, a região é us-east-1.
+    - Especifica a região da AWS onde o cluster será criado. Neste caso, a região é us-east-1.
 
 5. `--nodegroup-name=eks-cluster-nodegroup`:
 
-  - Define o nome do grupo de nós (nodegroup) dentro do cluster. O nome aqui é eks-cluster-nodegroup.
+    - Define o nome do grupo de nós (nodegroup) dentro do cluster. O nome aqui é eks-cluster-nodegroup.
 
 6. `--node-type=t3.medium`:
 
-  - Especifica o tipo de instância EC2 a ser usado para os nós do cluster. Aqui, o tipo de instância é t3.medium.
+    - Especifica o tipo de instância EC2 a ser usado para os nós do cluster. Aqui, o tipo de instância é t3.medium.
 
 7. `--nodes=2`:
 
-  - Define o número inicial de nós no cluster. Este valor inicial é 2.
+    - Define o número inicial de nós no cluster. Este valor inicial é 2.
 
 8. `--nodes-min=1`:
 
-  - Especifica o número mínimo de nós no grupo de nós. O valor mínimo aqui é 1.
+    - Especifica o número mínimo de nós no grupo de nós. O valor mínimo aqui é 1.
 
 9. `--nodes-max=3`:
 
-  - Define o número máximo de nós no grupo de nós. O valor máximo aqui é 3.
+    - Define o número máximo de nós no grupo de nós. O valor máximo aqui é 3.
 
 10. `--managed`:
 
-  - Indica que os nós do cluster serão gerenciados pela AWS. Isso significa que a AWS se encarregará de tarefas como a aplicação de patches e upgrades para os nós.
+    - Indica que os nós do cluster serão gerenciados pela AWS. Isso significa que a AWS se encarregará de tarefas como a aplicação de patches e upgrades para os nós.
 
 #### Resumo
 
