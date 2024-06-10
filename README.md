@@ -23,17 +23,6 @@ Acompanhe o meu progresso no PICK de 2024 nesse repositório. :rocket:
 ###    - [Day 10 - ServiceMonitor, PodMonitor e PrometheusRule](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-10)
 ###    - [Day 11 - Ingress e Context no Kubernetes](https://github.com/edemirtoldo/pick/tree/main/docs/k8s/day-11)
 
--------
-
-# Meu Projeto
-
-Bem-vindo ao meu projeto! Para mais informações, visite [meu site](https://example.com).
-
-Ou clique <a href="https://example.com" target="_blank">aqui</a> para abrir em uma nova guia.
-
-
--------
-
 &nbsp;
 
 :sunglasses:
