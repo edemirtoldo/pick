@@ -4,7 +4,7 @@
 
 ## Cert-Manager, Annotations e Labels 
 
-### Cert-manager
+### [Cert-manager](https://cert-manager.io/)
 
 Cert-manager é uma ferramenta de código aberto que ajuda a gerenciar certificados SSL/TLS em clusters Kubernetes. Ele automatiza a aquisição, renovação e gerenciamento de certificados de diversas fontes, como Let's Encrypt, HashiCorp Vault, Venafi e outras autoridades certificadoras (CAs).
 
@@ -22,6 +22,120 @@ Cert-manager é uma ferramenta de código aberto que ajuda a gerenciar certifica
 
 6. **Suporte a Integrações Complexas:** Pode ser configurado para trabalhar com Ingress controllers, permitindo a configuração automática de HTTPS para serviços expostos externamente.
 
+O `Let's Encrypt` é uma autoridade certificadora (CA) gratuita e automatizada que oferece certificados SSL/TLS. Ele fornece dois ambientes principais para testar e produzir certificados: o ambiente de produção (production) e o ambiente de preparo (staging).
 
+1. **Let's Encrypt Production (letsencrypt-production):**
+
+- Este ambiente é usado para emitir certificados que serão usados em produção, ou seja, em ambientes de produção real acessados por usuários finais.
+
+- Os certificados emitidos neste ambiente são submetidos aos limites de emissão normais do Let's Encrypt.
+
+- O limite atual do Let's Encrypt para emissão de certificados é de 50 certificados por conjunto de domínios por semana. Esse limite inclui tanto os certificados emitidos automaticamente quanto aqueles emitidos manualmente através de ferramentas como o cert-manager.
+
+- É importante usar este ambiente para certificados destinados a produção real, para garantir que os certificados estejam sujeitos aos mesmos requisitos e restrições que os certificados de produção normais.
+
+2. **Let's Encrypt Staging (letsencrypt-staging):**
+
+- Este ambiente é destinado ao desenvolvimento e teste de configurações de certificados.
+
+- Os certificados emitidos neste ambiente são totalmente funcionais e usam a mesma tecnologia que os certificados de produção, mas não são confiáveis pelos navegadores ou outros aplicativos.
+
+- O ambiente de preparo é útil para testar configurações, automatizações e integrações de certificados sem afetar os limites de emissão do ambiente de produção.
+
+- Os limites de emissão no ambiente de preparo são muito mais altos do que no ambiente de produção. Isso permite que os desenvolvedores testem suas configurações e scripts de automação sem se preocuparem em atingir os limites de emissão normais do Let's Encrypt.
+
+- Como os certificados de preparo não são confiáveis, eles são adequados apenas para ambientes de teste e desenvolvimento.
+
+Em resumo, o ambiente de produção do Let's Encrypt (letsencrypt-production) é para certificados destinados a uso em produção real, enquanto o ambiente de preparo (letsencrypt-staging) é para testes e desenvolvimento de configurações de certificados sem afetar os limites de emissão do ambiente de produção.
+
+#### Instalando e configurando o Cert-Manager.
+
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.0/cert-manager.yaml
+```
+
+> Versão: 1.15.0 [Cert-Manager Instalação kubectl apply](https://cert-manager.io/docs/installation/kubectl/)
+
+Vamos verificar se o pod está rodando.
+
+```bash
+kubectl get pods -n cert-manager
+```
+
+ou
+
+```bash
+kubectl get all -n cert-manager
+```
+
+#### Configurando
+
+Criando um Issuer `staging_issuer.yaml`
+
+```bash
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: user@example.com
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
+```
+
+Criando o ClusterIssuer `production_issuer.yaml`
+
+```bash
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: user@example.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
+```
+
+Vamos rodar o staging
+
+```bash
+kubectl apply -f staging_issuer.yaml
+```
+
+Vamos rodar o production 
+
+```bash
+kubectl apply -f production_issuer.yaml
+```
+
+Vamos verificar o staging
+
+```bash 
+kubectl get issuers.cert-manager.io
+```
+
+Vamos verificar o production
+
+```bash 
+kubectl get clusterissuers.cert-manager.io
+```
+
+Describe
+
+```bash
+kubectl describe clusterissuers.cert-manager.io letsencrypt-prod
+```
 
 
