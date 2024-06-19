@@ -68,7 +68,7 @@ ou
 kubectl get all -n cert-manager
 ```
 
-#### Configurando
+#### Configurando o Issuer que usa ACME para obter certificados de Let's Encrypt (staging / production) [ACME](https://cert-manager.io/docs/configuration/acme/)
 
 Criando um Issuer `staging_issuer.yaml`
 
@@ -105,37 +105,6 @@ spec:
     solvers:
     - http01:
         ingress:
-          ingressClassName: nginx
-```
-
-Vamos rodar o staging
-
-```bash
-kubectl apply -f staging_issuer.yaml
-```
-
-Vamos rodar o production 
-
-```bash
-kubectl apply -f production_issuer.yaml
-```
-
-Vamos verificar o staging
-
-```bash 
-kubectl get issuers.cert-manager.io
-```
-
-Vamos verificar o production
-
-```bash 
-kubectl get clusterissuers.cert-manager.io
-```
-
-Describe
-
-```bash
-kubectl describe clusterissuers.cert-manager.io letsencrypt-prod
-```
+          ingressClassName: ngin
 
 
