@@ -72,7 +72,7 @@ kubectl get all -n cert-manager
 
 Criando um Issuer `staging_issuer.yaml`
 
-```bash
+```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -91,7 +91,7 @@ spec:
 
 Criando o ClusterIssuer `production_issuer.yaml`
 
-```bash
+```yaml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
