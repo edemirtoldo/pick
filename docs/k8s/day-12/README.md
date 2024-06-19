@@ -68,7 +68,7 @@ ou
 kubectl get all -n cert-manager
 ```
 
-#### Configurando o Issuer que usa ACME para obter certificados de Let's Encrypt (staging / production) [ACME](https://cert-manager.io/docs/configuration/acme/)
+#### Configurando o Issuer que usa ACME para obter certificados de Let's Encrypt [Docs Issuer ACME](https://cert-manager.io/docs/configuration/acme/)
 
 Criando um Issuer `staging_issuer.yaml`
 
