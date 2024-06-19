@@ -106,5 +106,88 @@ spec:
     - http01:
         ingress:
           ingressClassName: ngin
+```
+
+Vamos aplicar a configuração especificada no arquivo `staging_issuer.yaml` ao cluster Kubernetes:
+
+```bash
+kubectl apply -f staging_issuer.yaml
+```
+
+Vamos aplicar a configuração especificada no arquivo `production_issuer.yaml` ao cluster Kubernetes:
+
+```bash
+kubectl apply -f production_issuer.yaml
+```
+
+Listar todos os `Issuer`:
+
+```bash
+kubectl get issuers.cert-manager.io
+```
+
+Listar todos os `ClusterIssuer`:
+
+```bash
+kubectl get clusterissuers.cert-manager.io
+```
+
+Detalhes do `ClusterIssuer`:
+
+```bash
+kubectl describe clusterissuers.cert-manager.io
+```
+
+#### Colocar o issuer para rodar
+
+Arquivo `ingress-6.yaml`
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: giropops-senhas
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - giropops.containers.expert
+    secretName: giropops-containers-expert-tls
+  rules:
+  - host: giropops.containers.expert
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: giropops-senhas
+            port:
+              number: 5000
+```
+
+```bash
+kubectl apply -f ingress-6.yaml
+```
+
+```bash
+kubectl get certificate
+```
+
+```bash
+kubectl get secret
+```
+
+Vamos ver os detalhes do certificado:
+
+```bash
+kubectl describe certificate giropops-containers-expert-tls
+```
+
+Tela:
+
 
 
