@@ -169,13 +169,19 @@ spec:
               number: 5000
 ```
 
+Vamos aplicar o `ingress-6.yaml`:
+
 ```bash
 kubectl apply -f ingress-6.yaml
 ```
 
+Listar o `certificate`:
+
 ```bash
 kubectl get certificate
 ```
+
+Listar o `secret`:
 
 ```bash
 kubectl get secret
