@@ -567,7 +567,7 @@ kubectl get svc
 
 ### Criando um Ingress no EKS
 
-Para criar um Ingress no EKS, precisamos criar um arquivo de configuração do Ingress ingress-eks.yaml com o seguinte conteúdo:
+Para criar um Ingress no EKS, precisamos criar um arquivo de configuração do Ingress `ingress-6.yaml` com o seguinte conteúdo:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
