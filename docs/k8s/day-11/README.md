@@ -536,6 +536,11 @@ Para instalar o Ingress NGINX Controller no EKS, precisamos executar os seguinte
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
 ```
 
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/aws/deploy.yaml
+```
+
+
 Clique [aqui](https://kubernetes.github.io/ingress-nginx/deploy/#aws) para acessar à documentação sobre a instalação do ingress controller `NETWORK LOAD BALANCER (NLB)` na AWS.
 
 Para consultar se foi instalado corretamente.
