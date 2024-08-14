@@ -448,7 +448,7 @@ Agora vamos acessar o seguinte link: http://giropops-senhas.io/
 
 ![ingress-5](https://github.com/edemirtoldo/pick/blob/main/docs/images/ingress-5.png)
 
-## Instalando um cluster para os nossos testes com ingress
+# Instalando um cluster EKS na AWS para os nossos testes com ingress
 
 Comando para criar um cluster EKS na AWS. 
 
